@@ -1,11 +1,15 @@
 import { version } from '../../package.json';
 import { Router } from 'express';
 import facets from './facets';
+import post from './post';
 
 export default ({ config, db }) => {
 	let api = Router();
 
-	// mount the facets resource
+	// mount the post resource
+	api.use('/post', post({ config, db }));
+
+    // mount the facets resource
 	api.use('/facets', facets({ config, db }));
 
 	// perhaps expose some API metadata at the root
